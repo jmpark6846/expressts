@@ -9,7 +9,6 @@ const ORMConfig: ConnectionOptions = {
   database: process.env.POSTGRES_DATABASE,
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   synchronize: true,
-  logging: true,
   cli: { migrationsDir: 'src/migrations' },
 }
 

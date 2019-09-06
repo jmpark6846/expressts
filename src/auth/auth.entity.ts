@@ -12,7 +12,7 @@ class User {
   @Column()
   public email: string
 
-  @Column()
+  @Column({ select: false })
   public password: string
 
   @OneToMany(() => Post, (post: Post) => post.author)

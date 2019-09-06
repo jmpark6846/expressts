@@ -54,7 +54,10 @@ class AuthController implements Controller {
 
   private signin = async (request: Request, response: Response, next: NextFunction) => {
     try {
-      const user = await this.user.findOne({ email: request.body.email })
+      const user = await this.user.findOne(
+        { email: request.body.email },
+        { select: ['id', 'name', 'email', 'password'] }
+      )
       if (user) {
         const isMatching = await bcrypt.compare(request.body.password, user.password)
         if (isMatching) {
@@ -78,11 +81,12 @@ class AuthController implements Controller {
     response.send(200)
   }
 
-  private getPostsByUser = async (requset: RequestWithUser, response: Response, next: NextFunction) => {
-    if (Number(requset.params.id) === requset.user.id) {
+  private getPostsByUser = async (request: RequestWithUser, response: Response, next: NextFunction) => {
+    if (Number(request.params.id) === request.user.id) {
       const posts = await this.post
         .createQueryBuilder('post')
         .leftJoinAndSelect('post.author', 'user')
+        .where('post.author.id = :userId', { userId: request.user.id })
         .getMany()
       response.send(posts)
     } else {

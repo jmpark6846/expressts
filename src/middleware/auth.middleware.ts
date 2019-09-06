@@ -13,6 +13,7 @@ async function authMiddleware(request: RequestWithUser, response: Response, next
     try {
       const tokenData = jwt.verify(cookies.Authorization, process.env.JWT_SECRET) as DataStoredInToken
       const user = await userRepository.findOne({ id: tokenData.id })
+
       if (user) {
         request.user = user
         next()
@@ -23,7 +24,8 @@ async function authMiddleware(request: RequestWithUser, response: Response, next
       next(new ServerError(error))
     }
   } else {
-    next(new ServerError('access token missing'))
+    request.user = undefined
+    next()
   }
 }
 

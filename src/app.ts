@@ -2,6 +2,9 @@ import express from 'express'
 import mongoose, { connect } from 'mongoose'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
+import logger from 'morgan'
+import cors from 'cors'
+
 import errorMiddleware from './middleware/error.middleware'
 import loggerMiddleware from './middleware/logger.middleware'
 import authMiddleware from './middleware/auth.middleware'
@@ -20,9 +23,11 @@ class App {
   }
 
   private initializeMiddleware() {
-    this.app.use(loggerMiddleware)
+    this.app.use(cors())
+    this.app.use(logger('dev'))
     this.app.use(bodyParser.json())
     this.app.use(cookieParser())
+    this.app.use(authMiddleware)
   }
 
   private initializeControllers(controllers) {

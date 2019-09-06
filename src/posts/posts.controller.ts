@@ -11,6 +11,7 @@ import ValidationException from '../exceptions/ValidationException'
 import validateData from '../interfaces/validateData'
 import Post from './post.entity'
 import { getRepository } from 'typeorm'
+import checkAuth from '../utils'
 
 class PostController implements Controller {
   public path: string = '/posts'
@@ -25,7 +26,7 @@ class PostController implements Controller {
     this.router.get(this.path, this.getPosts)
     this.router.get(this.path + '/:id', this.getPostById)
     this.router
-      .all(this.path, authMiddleware)
+      .all(this.path, checkAuth)
       .post(this.path, this.createPost)
       .patch(this.path + '/:id', validationMiddleware(Post, true), this.modifyPost)
       .delete(this.path + '/:id', this.deletePost)
