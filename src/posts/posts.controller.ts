@@ -61,6 +61,7 @@ class PostController implements Controller {
     const createdPost = new PostModel(postData);
     try {
       const savedPost = await createdPost.save();
+      await savedPost.populate("author", "-password").execPopulate();
       res.send(savedPost);
     } catch (error) {
       next(new ServerError(error));

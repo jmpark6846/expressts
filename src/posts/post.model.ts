@@ -1,11 +1,12 @@
 import mongoose, { Types } from "mongoose";
-import { prop, Typegoose } from "typegoose";
+import { prop, Typegoose, Ref } from "typegoose";
 import { IsString, IsInstance } from "class-validator";
+import { User } from "../auth/user.model";
 
 export class Post extends Typegoose {
-  @prop()
+  @prop({ ref: User })
   @IsInstance(Types.ObjectId)
-  author: Types.ObjectId;
+  author: Ref<User>;
 
   @prop()
   @IsString()

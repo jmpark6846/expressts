@@ -19,6 +19,7 @@ class AuthController implements Controller {
   public initializeRoutes() {
     this.router.post(this.path + "/signup", validationMiddleware(User), this.signup);
     this.router.post(this.path + "/signin", validationMiddleware(SignInData), this.signin);
+    this.router.post(this.path + "/logout", this.logout);
   }
 
   private signup = async (request: Request, response: Response, next: NextFunction) => {
@@ -60,6 +61,11 @@ class AuthController implements Controller {
     } catch (error) {
       next(new ServerError(error));
     }
+  };
+
+  private logout = (request: Request, response: Response) => {
+    response.setHeader("Set-Cookie", ["Authorization=;Max-age=0"]);
+    response.send(200);
   };
 
   private createToken(user: User): TokenData {
