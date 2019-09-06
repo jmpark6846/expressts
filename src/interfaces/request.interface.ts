@@ -1,7 +1,7 @@
-import { Request } from "express";
-import { User } from "auth/user.model";
+import { Request } from 'express'
+import User from '../auth/auth.entity'
 interface RequestWithUser extends Request {
-  user: User;
+  user: User
 }
 
-export default RequestWithUser;
+export default RequestWithUser

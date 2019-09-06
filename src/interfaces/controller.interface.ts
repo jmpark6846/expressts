@@ -1,7 +1,7 @@
-import { Router } from "express";
+import { Router } from 'express'
 interface Controller {
-  path: string;
-  router: Router;
+  path: string
+  router: Router
 }
 
-export default Controller;
+export default Controller

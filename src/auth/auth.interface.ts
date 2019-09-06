@@ -1,10 +1,10 @@
-import mongoose, { Types } from "mongoose";
+import mongoose, { Types } from 'mongoose'
 
 export interface TokenData {
-  token: string;
-  expiresIn: number;
+  token: string
+  expiresIn: number
 }
 
 export interface DataStoredInToken {
-  _id: Types.ObjectId;
+  id: number
 }

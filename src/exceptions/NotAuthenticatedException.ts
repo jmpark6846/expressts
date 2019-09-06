@@ -1,9 +1,9 @@
-import HttpException from "./HttpException";
+import HttpException from './HttpException'
 
 class NotAuthenticated extends HttpException {
   constructor(messages: string) {
-    super(401, "not authenticated");
+    super(401, 'not authenticated')
   }
 }
 
-export default NotAuthenticated;
+export default NotAuthenticated

@@ -1,9 +1,9 @@
-import HttpException from "./HttpException";
+import HttpException from './HttpException'
 
 class PermissionDenied extends HttpException {
   constructor() {
-    super(403, `permission denied`);
+    super(403, `permission denied`)
   }
 }
 
-export default PermissionDenied;
+export default PermissionDenied

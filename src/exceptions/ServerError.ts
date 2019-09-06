@@ -1,9 +1,9 @@
-import HttpException from "./HttpException";
+import HttpException from './HttpException'
 
 class ServerError extends HttpException {
   constructor(message?: string) {
-    super(500, `Something went wrong. ` + message);
+    super(500, `Something went wrong. ` + message)
   }
 }
 
-export default ServerError;
+export default ServerError
